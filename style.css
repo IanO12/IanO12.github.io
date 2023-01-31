@@ -1,7 +1,10 @@
 body{
   background-color: #3A3B3C;
-  font-color: white;
 }
 a{
   font-size: 30px; 
+  font-weight: bold;
+}
+h1{
+  font-color: white;
 }
