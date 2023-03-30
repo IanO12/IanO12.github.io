@@ -3,10 +3,70 @@
   <head>
     <meta charset="UTF-8" />
     <title>Phaser Game</title>
-    <script src="node_modules/phaser/dist/phaser.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3.15.1/dist/phaser-arcade-physics.min.js"></script>
   </head>
   <body>
-    <script src="game.js">
+    <script>
+        var config = {
+            type: Phaser.AUTO,
+            width: 800,
+            height: 600,
+            physics: {
+            default: 'arcade',
+            arcade: {
+            }
+            },
+            scene: {
+            preload: preload,
+            create: create
+            }
+            };
+            
+        
+        var game = new Phaser.Game(config);
+        var player;
+        
+        function preload() {
+            this.load.image('player', 'assets/knight.png');
+        }
+        
+        function create() {
+            console.log("Worked");
+            player = this.physics.add.sprite(400, 300, 'player');
+            player.setScale(2);
+            player.setCollideWorldBounds(true);
+            player.setInteractive();
+            this.input.on('gameobjectdown', function (pointer, gameObject) {
+            gameObject.input.draggable = true;
+            gameObject.input.dragFromCenter = false;
+            gameObject.input.boundsRect = new Phaser.Geom.Rectangle(0, 0, game.config.width, game.config.height);
+            });
+            
+            this.input.keyboard.on('keydown_LEFT', function (event) {
+              player.setVelocityX(-160);
+            });
+        
+            this.input.keyboard.on('keydown_RIGHT', function (event) {
+              player.setVelocityX(160);
+            });
+        
+            this.input.keyboard.on('keydown_UP', function (event) {
+              player.setVelocityY(-160);
+            });
+        
+            this.input.keyboard.on('keydown_DOWN', function (event) {
+              player.setVelocityY(160);
+            });
+        
+            this.input.keyboard.on('keyup', function (event) {
+              player.setVelocityX(0);
+              player.setVelocityY(0);
+            });
+        }
+        
+        function update() {
+        
+        }
     </script>
   </body>
 </html>
