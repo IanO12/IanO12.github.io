@@ -29,6 +29,11 @@ const camera = new THREE.PerspectiveCamera( fov, window.innerWidth /
 window.innerHeight, near, far );
 const renderer = new THREE.WebGLRenderer();
 
+const geometry = new THREE.TorusGeometry( 2, 0.4, 16, 100 );
+const material = new THREE.MeshBasicMaterial( { color: 0xffff00 } );
+const torus = new THREE.Mesh( geometry, material );
+scene.add( torus );
+
 // Load Textures
 let floorWidth = 20;
 let floorHeight = 40;
@@ -36,11 +41,11 @@ let boxWidth = 1;
 let boxHeight = 2;
 let boxDepth = 1;
 let textureLoader = new THREE.TextureLoader();
-let grass = textureLoader.load('grass1.png');
+let grass = textureLoader.load('grass.webp');
 grass.wrapS = THREE.RepeatWrapping;
 grass.wrapT = THREE.RepeatWrapping;
 grass.repeat.set(floorWidth / 2, floorHeight / 2);
-let stone = textureLoader.load('stone wall 4.png');
+let stone = textureLoader.load('Brick_Block.webp');
 stone.wrapS = THREE.RepeatWrapping;
 stone.wrapT = THREE.RepeatWrapping;
 stone.repeat.set(boxWidth / 2, boxHeight / 2);
